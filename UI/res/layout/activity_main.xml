@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/mainbackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/youme_im_background" >
+
+        <LinearLayout
+            android:id="@+id/tabSelectBackgrounnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/youme_im_tab_backgroud"
+            android:orientation="horizontal" >
+
+            <RadioGroup
+                android:id="@+id/tabSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/check_system"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/youme_im_tab_check_system"
+                    android:button="@null"
+                    android:checked="true"
+                    android:tag="@string/msg_system" />
+
+                <RadioButton
+                    android:id="@+id/check_world"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/youme_im_tab_check_world"
+                    android:button="@null"
+                    android:tag="@string/msg_world" />
+
+                <RadioButton
+                    android:id="@+id/check_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/youme_im_tab_check_private"
+                    android:button="@null"
+                    android:tag="@string/msg_private" />
+
+                <RadioButton
+                    android:id="@+id/check_guild"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/youme_im_tab_check_guild"
+                    android:button="@null"
+                    android:tag="@string/msg_guild" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/tabSelectBackgrounnd"
+            android:layout_below="@id/tabSelectBackgrounnd" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/mainbackground"
+        android:layout_alignTop="@id/mainbackground"
+        android:layout_marginRight="-4dp"
+        android:layout_marginTop="-4dp"
+        android:background="@color/transparent"
+        android:contentDescription="@string/exit"
+        android:src="@drawable/youme_im_exit" />
+
+</RelativeLayout>

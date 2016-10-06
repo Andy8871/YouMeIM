@@ -1,0 +1,386 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+package YouMeIMProtocol;
+
+
+//定义的一些namevlau 结构
+enum NAME_TYPE
+{
+    NAME_UNKNOW = 0;
+    NAME_INT32  = 1;
+    NAME_UIN32  = 2;
+    NAME_INT64  = 3;
+    NAME_UINT64 = 4;
+    NAME_STRING = 5;
+    NAME_BYTES  = 6;
+    NAME_BOOL  = 7;
+}
+
+message NameValue
+{
+    required string name = 1;
+    required string value = 2;
+    required NAME_TYPE type  = 3;
+}
+
+//设备平台
+enum Device_Platform
+{
+    Platform_Unknow = 0;
+    Platform_Android=1;
+    Platform_IOS=2;
+    Platform_Windows=3;
+    Platform_OSX=4;
+    Platform_Linux=5;
+}
+
+//网络类型
+enum NetworkType
+{
+    NetworkType_Unknow=0;
+    NetworkType_3G=1; //移动网络
+    NetworkType_Wifi=2;
+}
+
+
+//消息类型
+enum Command_TYPE
+{
+    Command_Unknow =0;
+    Command_Login=1;   
+    Command_LogOut=2;
+    //登入回复
+    Command_LoginResponse=3;
+    //登出回复
+    Command_LogOutResponse=4;
+    //好友登录
+    Command_ContactLogin =5;
+    //好友登出
+    Command_ContactLogOut =6;
+
+    //心跳包
+    Command_Heart = 7;
+    Command_HeartResponse = 8;
+    //服务器发来的确认包
+    Command_PackageAck = 9;
+   
+    Command_SessionExpire =10;
+    //客户端发给服务器的确认包
+    Command_ClientToServerPackageAck = 11;
+	//重定向
+    Command_Redirect = 12;
+	Command_RedirectResponse = 13;
+    //获取好友列表
+    Command_GetContactList=1000;
+    Command_GetContactListResponse=1001;
+    //获取黑名单列表
+    Command_GetBlacklistList=1002;   
+    //获取黑名单回复
+    Command_GetBlacklistListResponse=1003;  
+
+    //添加好友
+    Command_AddContact=1004; 
+    //添加好友请求是否发送成功
+    Command_AddContactRequest=1005;
+    //收到好友申请
+    Command_ReceiveInvitedApplication = 1006;
+    //接受好友邀请
+    Command_AgreeContactInvited=1007;
+    //拒绝好友邀请
+    Command_RefuseContactInvited=1008;
+    //服务器发送给被邀请者消息
+    Command_InvitedResponse = 1009;
+    //添加好友最终结果，服务器返回
+    Command_AddContactResponse = 1010;
+
+
+    //删除好友
+    Command_DeleteContact=1011;
+    //删除好友回调
+    Command_DeleteContactResponse=1012;
+    //被别人删除了
+    Command_WasDeleted=1013;
+
+
+    //加入黑名单
+    Command_AddToBlacklist=1014;
+    //加入黑名单回复
+    Command_AddToBlacklistResponse=1015;
+    //被别人加入黑名单
+    Command_AddedToBlacklist = 1016;
+
+
+    //解除黑名单
+    Command_KickoutFromBlacklist=1017;
+    Command_KickoutFromBlacklistResponse=1018;
+    Command_KickoutedFromBlacklist=1019;
+
+
+
+    //获取好友信息
+    Command_GetContactInfo=1020;
+    Command_GetContactInfoResponse=1021;
+
+	
+    //群信息类型
+    Command_GetGroupInfo = 2000;
+    Command_GetGroupInfoResponse = 2001;
+
+
+    //获取所有分组ID
+    Command_GetAllGroup = 2002;
+    Command_GetAllGroupResponse = 2003;
+
+
+    Command_CreateGroup = 2004;
+    Command_CreateGroupResponse = 2005;
+
+    //销毁群
+    Command_DestroyGroup = 2006;
+    Command_DestroyGroupResponse = 2007;
+    Command_GroupDestroyed = 2008;
+
+
+    //加入群
+    Command_JoinGroup = 2009;
+    //加入群的消息是否发送成功
+    Command_JoinGroupRequest = 2010;
+    //加入群的结果，是同意还是拒绝
+    Command_JoinGroupResponse = 2011;
+    //有人加入到了群
+    Command_OtherJoinGroup = 2012;
+
+
+
+    //离开群
+     Command_LeaveGroup = 2013;
+    //加入群的消息是否发送成功
+    Command_LeaveGroupResponse = 2014;
+    //有人加入到了群
+    Command_OtherLeaveGroup = 2015;
+
+    //踢出成员
+    Command_KickoutMember = 2016;
+    //踢出群的消息是否发送成功
+    Command_KickoutMemberResponse = 2017;
+    //有人被踢出了群
+    Command_OtherKickoutedFromGroup = 2018;
+
+    //获取群成员
+    Command_GetGroupMembers = 2019;
+    Command_GetGroupMembersResponse = 2020;
+
+    //修改群信息
+    Command_ModifyGroupInfo = 2021;
+    Command_ModifyGroupInfoResponse = 2022;
+    Command_GroupInfoModifyed = 2023;
+
+
+    //群审批
+    Command_AgreeGroupInvited = 2024;
+    Command_RefuseGroupInvited = 2025;
+    Command_GroupInvitedResponse = 2026; //服务器收到了管理员的同意或者拒绝，返回给管理员的信息
+
+    //修改成员信息
+    Command_ModifyMemberInfo = 2027;
+    Command_ModifyMemberInfoResponse = 2028;
+    Command_MemberInfoModifyed = 2029; //成员信息被修改了
+    //接收到群申请的消息
+    Command_ReceiveGroupInvitedApplication = 2030;
+
+    //聊天消息
+	
+    Commnad_Chat_Custom = 3000;
+    Commnad_Chat_Text = 3001;
+    Commnad_Chat_Emoji = 3002;
+    Commnad_Chat_File = 3003;
+	Commnad_SendMessage = 3004;
+	Commnad_Chat_Voice = 3005;
+  
+    Commnad_Chat_Custom_Server = 3101;
+    Commnad_Chat_Text_Server = 3102;
+    Commnad_Chat_Emoji_Server = 3103;
+    Commnad_Chat_File_Server = 3104;
+	Commnad_RecvMessage = 3105;
+    Commnad_Chat_Voice_Server = 3106;
+	Commnad_GetMessage_Notify = 3107;
+    //获取离线消息
+	Command_GetOfflineMessageResponse = 3205;
+    Command_GetOfflineMessage = 3206;
+	
+    //发送消息给服务器，服务器处理完之后回复的消息
+    Command_MessageToServerACK = 3207;
+	
+	//获取上传消息凭证
+	Command_GetUploadtoken = 3208;
+	Command_GetUploadtokenResponse = 3209;
+    
+	//获取下载消息凭证
+	Command_GetDownloadtoken = 3210;
+	Command_GetDownloadtokenResponse = 3211;
+	Command_Download=3212;//给u3d 使用的
+
+	
+    Command_ServerForwardMsg = 10001; //服务器转发过来的消息
+    Command_ServerForwardGroupMsg = 10002; //服务器转发过来的群组消息
+    Command_ServerForwardRommMsg = 10003; //服务器转发过来的房间消息
+    
+    Command_QueryServerRunStatus = 10100;          //重定向轮训服务器状态
+    Command_QueryServerRunStatusResponse = 10101;  // 回复
+}
+//联系人信息
+message ContactInfo
+{
+    required string YOUMEID=1;
+    required int32  status=2;
+}
+
+
+
+// 数据包的头部信息,尽可能少的字段，这个部分会解析2次，客户端发过去的
+message PacketHead
+{
+    //消息类型
+    required Command_TYPE msgtype=1;
+    //协议版本号
+    required int32 msgversion =2;
+    //设备平台
+    required Device_Platform platform =3;
+    required string Brand           = 4;//
+    required string SysVersion        = 5;
+    required int32  YmSdkVersion      = 6;
+    required string CpuArch           = 7;
+    required string PackageName       = 8;
+    required string Identify =9;
+    required string AppKey            = 10;
+    required string SDKName           = 11;//用于区分是什么SDK，例如“voice”，“im”
+    required string Model             =12;//手机型号
+    required NetworkType NetworkType = 13;//网络类型
+    required string CPUChip = 14;//CPU芯片
+
+    required int64 msgSerialNum=15; //客户端生成的序号   
+    required string SessionID =16; //服务器返回的一个东东
+    required string YOUMEID =17;
+	optional int64  localtime = 18;//发包的时间，和服务器对过时的 
+    optional int64  serverSerialNum =19; //服务器序列号，如果是给服务器发送发送回应包需要带上这个序号
+	
+	repeated NameValue params =20;
+}
+
+
+//需要再封装一下，否则解不出来
+message ReqHead
+{
+   required PacketHead head=1;
+}
+
+
+// 服务器返回的 数据包的头部信息
+message ServerPacketHead
+{
+    //消息类型
+    required Command_TYPE msgtype=1;
+    //协议版本号
+    required int32 msgversion=2;
+    required int64 msgSerialNum=3; //服务器产生的序号
+    //错误码
+    required int32 code=4;//0表示成功，其他看具体业务
+    optional int64 clientSerialNum=5; //如果是对客户端发送的回应包，需要带上这个序号。
+	optional int64 servertime = 6;
+}
+
+message ServerReqHead
+{
+    required ServerPacketHead head=1;
+}
+
+
+
+//IM 消息, 登陆消息
+message YouMeIM_Command_Login
+{
+    required PacketHead msgHead =1;
+    required string userPasswd = 2;
+	optional string olduserPasswd = 3;
+}
+
+//登陆消息回调，服务器返回的消息
+message YouMeIM_Command_LoginResponse
+{
+    required ServerPacketHead msgHead =1;
+    required string sessionID = 2;
+	required ContactInfo userInfo =3;
+	required string secrect =4;
+    optional string errorDescription=5;
+}
+
+//登出消息
+message YouMeIM_Command_Logout
+{
+    required PacketHead msgHead =1;
+}
+
+//登出回调
+message YouMeIM_Command_LogoutResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required int32 status=2;
+    optional string errorDescription=3;
+}
+
+enum ConnectEventType
+{	
+  EventType_Unknow =0;
+  //账号被删除
+  EventType_AcountDeleted=1;
+  //账号被踢下线了
+  EventType_AcountKickout=2;
+}
+
+//断开连接回调，被挤下线，禁用账号回复
+message YouMeIM_Command_DisConnectNotify
+{
+  required PacketHead msgHead = 1;
+  required ConnectEventType evtType = 2;
+}
+
+//心跳包
+message YouMeIM_Command_Heart
+{
+    required PacketHead msgHead = 1;
+}
+
+
+//心跳包回复
+message YouMeIM_Command_HeartResponse
+{
+    required ServerPacketHead msgHead = 1;
+}
+
+
+//服务器发来的确认包消息
+message YouMeIM_Command_PackageAck
+{
+    required ServerPacketHead msgHead=1;
+}
+
+//sdk 发给服务器的确认包
+message YouMeIM_Command_ClientToServerAck
+{
+   required PacketHead msgHead = 1;
+}
+
+//好友登录
+message YouMeIM_Command_ContactLogin
+{
+   required ServerPacketHead msgHead = 1;
+   required string YOUMEID=2;
+}
+
+
+//好友登出
+message YouMeIM_Command_ContactLogout
+{
+    required ServerPacketHead msgHead = 1;
+    required string YOUMEID=2;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">UI</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+	<string name="exit">exit</string>
+	<string name="msg_system">system</string>
+	<string name="msg_world">world</string>
+	<string name="msg_private">private</string>
+	<string name="msg_guild">guild</string>
+</resources>

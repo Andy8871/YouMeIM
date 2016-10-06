@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="facename">
+        <item>[/微笑]</item>
+        <item>[/叹气]</item>
+        <item>[/色]</item>
+        <item>[/发呆]</item>
+        <item>[/调皮]</item>
+        <item>[/猪头]</item>
+        <item>[/大哭]</item>
+        <item>[/委屈]</item>
+        <item>[/白眼]</item>
+        <item>[/阴险]</item>
+        <item>[/大兵]</item>
+        <item>[/差劲]</item>
+        <item>[/快哭了]</item>
+    </string-array>
+    <string-array name="faceimage">
+        <item>@drawable/p024</item>
+        <item>@drawable/p041</item>
+        <item>@drawable/p020</item>
+        <item>@drawable/p044</item>
+        <item>@drawable/p002</item>
+        <item>@drawable/p008</item>
+        <item>@drawable/p011</item>
+        <item>@drawable/p015</item>
+        <item>@drawable/p031</item>
+        <item>@drawable/p042</item>
+        <item>@drawable/p051</item>
+        <item>@drawable/p071</item>
+        <item>@drawable/p089</item>
+    </string-array>
+    <string-array name="facegif">
+        <item>image/024.gif</item>
+        <item>image/041.gif</item>
+        <item>image/020.gif</item>
+        <item>image/044.gif</item>
+        <item>image/002.gif</item>
+        <item>image/008.gif</item>
+        <item>image/011.gif</item>
+        <item>image/015.gif</item>
+        <item>image/031.gif</item>
+        <item>image/042.gif</item>
+        <item>image/051.gif</item>
+        <item>image/071.gif</item>
+        <item>image/089.gif</item>
+    </string-array>
+
+</resources>

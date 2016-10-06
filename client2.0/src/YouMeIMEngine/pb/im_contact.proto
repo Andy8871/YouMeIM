@@ -1,0 +1,174 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+package YouMeIMProtocol;
+import "im_common.proto";
+
+
+//获取联系人列表
+message YouMeIM_Command_GetContactList
+{
+    required PacketHead msgHead = 1;
+}
+
+//获取黑名单列表
+message YouMeIM_Command_GetBlacklistList
+{
+   required PacketHead msgHead = 1;
+}
+
+
+
+//服务器返回联系人ID
+message YouMeIM_Command_GetContactListResponse
+{
+    required ServerPacketHead msgHead = 1;
+    repeated ContactInfo contacts =2;
+}
+
+//获取黑名单回复
+message YouMeIM_Command_GetBlacklistListResponse
+{
+    required ServerPacketHead msgHead = 1;
+    repeated ContactInfo contacts=2;
+}
+
+
+//添加联系人
+message YouMeIM_Command_AddContact
+{
+    required PacketHead msgHead = 1;
+    required string YOUMEID =2;
+    optional string reason=3;
+}
+//服务器已经请求发给了对方
+message YouMeIM_Command_AddContactRequest
+{
+    required ServerPacketHead msgHead = 1;
+    required string YOUMEID =2;
+}
+//添加好友回复事件
+enum YouMeIM_AddContactEvent
+{
+    AddContactEvent_Agree=0;
+    AddContactEvent_Refuse = 1;
+}
+
+//接收到好友请求
+message YouMeIM_Command_ReceiveContactInvited
+{
+    required ServerPacketHead msgHead = 1;
+    required ContactInfo  contactinfo =2;
+    optional string reason=3;
+}
+
+
+//同意好友请求
+message YouMeIM_Command_AgreeContactInvited
+{
+    required PacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//拒绝好友请求
+message YouMeIM_Command_RefuseContactInvited
+{
+    required PacketHead msgHead = 1;
+    required string  YOUMEID =2;
+    optional string reason=3;
+}
+
+message YouMeIM_Command_InvitedResponse
+{
+    required ServerPacketHead msgHead = 1;
+	required YouMeIM_AddContactEvent evtType=2;
+	required string  YOUMEID =3;
+    
+}
+
+
+message YouMeIM_Command_AddContactResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required YouMeIM_AddContactEvent evtType=2;
+    optional ContactInfo  contactinfo =3;
+}
+
+
+
+//删除联系人
+message YouMeIM_Command_DeleteContact
+{
+    required PacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//删除联系人回调
+message YouMeIM_Command_DeleteContactResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//被别人删除了
+message YouMeIM_Command_WasDeleted
+{
+    required ServerPacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//添加好友到黑名单
+message YouMeIM_Command_AddContactToBlacklist
+{
+    required PacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+
+//添加黑名单回复
+message YouMeIM_Command_AddContactToBlacklistResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//被别人添加到了黑名单了
+message YouMeIM_Command_AddedToBlacklist
+{
+    required ServerPacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//解除黑名单
+message YouMeIM_Command_KickedFromBlacklist
+{
+    required PacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//解除黑名单回复
+message YouMeIM_Command_KickedFromBlacklistResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//被好友解除了黑名单
+message YouMeIM_Command_WasKickedFromBlacklist
+{
+    required ServerPacketHead msgHead = 1;
+    required string  YOUMEID =2;
+}
+
+//获取联系人信息
+message YouMeIM_Command_GetContactInfo
+{
+    required PacketHead msgHead = 1;
+    repeated string YOUMEID=2;
+}
+
+//获取联系人信息回调
+message YouMeIM_Command_GetContactInfoResponse
+{
+    required ServerPacketHead msgHead = 1;
+    repeated ContactInfo contactInfoList =2;
+}

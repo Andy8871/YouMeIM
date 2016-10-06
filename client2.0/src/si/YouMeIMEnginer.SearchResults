@@ -1,0 +1,50 @@
+---- android Matches (49 in 14 files) ----
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):    android:versionCode="1"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):    android:versionName="1.0" >
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):        android:minSdkVersion="8"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):        android:targetSdkVersion="21" />
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):        android:allowBackup="true"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):        android:icon="@drawable/ic_launcher"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):        android:label="@string/app_name"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):        android:theme="@style/AppTheme" >
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):    android:versionCode="1"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):    android:versionName="1.0" >
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):        android:minSdkVersion="8"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):        android:targetSdkVersion="21" />
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):        android:allowBackup="true"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):        android:icon="@drawable/ic_launcher"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):        android:label="@string/app_name"
+AndroidManifest.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\bin):        android:theme="@style/AppTheme" >
+AppPara.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.annotation.SuppressLint;
+AppPara.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.content.Context;
+AppPara.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.content.pm.PackageManager;
+AppPara.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.os.Build;
+AppPara.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.telephony.TelephonyManager;
+AppPara.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):			NativeEngine.setCPUArch(android.os.Build.CPU_ABI);
+AppPara.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):			NativeEngine.setCPUChip(android.os.Build.HARDWARE);
+AppPara.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):			String mSysVersionString = android.os.Build.VERSION.RELEASE;
+com.youme.imengine_NativeEngine.cpp (e:\youme\code\client\im\client2.0\src\youmeimengine\android\jni):#include <android/log.h>
+IMEngine.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.R.integer;
+IMEngine.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.content.Context;
+Log.cpp (e:\youme\code\client\im\client2.0\src\youmecommon):#include <android/log.h>
+NativeEngine.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.R.integer;
+NativeEngine.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.content.Context;
+Platform_macros.h (e:\youme\code\client\im\client2.0\src\youmecommon\google\protobuf\stubs):// TLS support on android.
+Proguard-project.txt (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):# in ${sdk.dir}/tools/proguard/proguard-android.txt
+Proguard-project.txt (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java):#   http://developer.android.com/guide/developing/tools/proguard.html
+SpeechRecord.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.media.AudioFormat;
+SpeechRecord.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.media.AudioManager;
+SpeechRecord.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.media.AudioRecord;
+SpeechRecord.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.media.AudioTrack;
+SpeechRecord.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.media.MediaRecorder;
+SpeechRecord.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.util.Log;
+Styles.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\res\values):    <style name="AppBaseTheme" parent="android:Theme.Light">
+Styles.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\res\values-v11):    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+Styles.xml (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\res\values-v14):    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+YouMeSpeechRecognizer.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.content.Context;
+YouMeSpeechRecognizer.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.media.MediaPlayer;
+YouMeSpeechRecognizer.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.os.Bundle;
+YouMeSpeechRecognizer.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.util.JsonToken;
+YouMeSpeechRecognizer.java (e:\youme\code\client\im\client2.0\src\youmeimengine\android\java\src\com\youme\imengine):import android.util.Log;

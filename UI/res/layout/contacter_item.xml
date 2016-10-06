@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+    
+    <RadioButton android:id="@+id/contact_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:background="@drawable/contacterselecter"/>
+    
+    <ImageView android:id="@+id/contact_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/youme_im_gamer_head"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="4dp"/>
+    
+    <TextView android:id="@+id/contact_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/contact_head"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="2dp"
+       	android:text="name"
+        android:textColor="#cccccccc"/>
+    
+
+</RelativeLayout>

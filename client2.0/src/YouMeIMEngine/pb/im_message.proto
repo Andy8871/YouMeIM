@@ -1,0 +1,237 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+package YouMeIMProtocol;
+import "im_common.proto";
+
+//聊天类型
+  enum YouMeIM_ChatType
+  {
+	   	ChatType_Unknow = 0;
+      //私聊
+      ChatType_PrivateChat=1;
+      //群聊
+      ChatType_GroupChat=2;
+      //聊天室
+      ChatType_RoomChat=3;
+  };
+  //消息类型
+  enum YouMeIM_MessageBodyType
+  {
+	  MessageBodyType_Unknow = 0;
+      //文本等
+      MessageBodyType_TXT=1;
+      //自定义消息
+      MessageBodyType_CustomMesssage=2;
+      //表情
+      MessageBodyType_Emoji=3;
+      //图片
+      MessageBodyType_Image=4;
+      //语音
+      MessageBodyType_Voice=5;
+      //视频
+      MessageBodyType_Video=6;
+      //文件
+      MessageBodyType_File=7;
+  };
+
+  //自定义消息，可以是二进制
+  message YouMeIM_MessageBodyCustom
+  {
+    required YouMeIM_MessageBodyType msgType = 1;
+    required bytes customContent  = 2;
+  }
+
+  //文本消息，字符串类型
+  message YouMeIM_MessageBodyText
+  {
+    required YouMeIM_MessageBodyType msgType = 1;
+    required string content = 2;
+  }
+
+//表情消息
+message YouMeIM_MessageBodyEmoji
+{
+  required YouMeIM_MessageBodyType msgType = 1;
+  required int32 emojiID = 2;
+}
+
+
+//文件类型消息
+message YouMeIM_MessageBodyFile
+{
+	required YouMeIM_MessageBodyType msgType = 1;
+	required string url = 2;
+	optional uint32 areaCode = 3;
+	optional string md5 = 4;
+	optional string suffix = 5;
+	optional uint32 fileSize = 6;
+	repeated NameValue extend =7;
+}
+
+//语音消息，字符串类型
+message YouMeIM_MessageBodyVoice
+{
+    required YouMeIM_MessageBodyType msgType = 1;
+    required string key = 2;
+	required string downloadurl = 3;
+	optional string characters = 4;
+	optional string param=5;
+	optional uint32 time = 6;	//语音时长(ms)
+	optional uint32 areaCode = 7;
+	optional uint32 fileSize = 8;
+	optional string md5 = 9;
+	optional string suffix = 10;
+}
+  
+//发送自定义消息，可以是二进制数据，也可以是文本
+message YouMeIM_Command_ClientToServerCustom
+{
+  required PacketHead msgHead = 1;
+  required YouMeIM_MessageBodyCustom messageBody = 2;
+  required YouMeIM_ChatType chatType = 3;
+  required string YOUMEGROUPID = 4;
+  
+}
+//发送聊天信息
+message YouMeIM_Command_ClientToServerText
+{
+  required PacketHead msgHead = 1;
+  required YouMeIM_MessageBodyText messageBody = 2;
+  required YouMeIM_ChatType chatType = 3;
+  required string YOUMEGROUPID = 4;
+}
+
+
+message YouMeIM_Command_ClientToServerEmoji
+{
+  required PacketHead msgHead = 1;
+  required YouMeIM_MessageBodyEmoji messageBody = 2;
+  required YouMeIM_ChatType chatType = 3;
+  required string YOUMEGROUPID = 4;
+}
+
+
+message YouMeIM_Command_ClientToServerFile
+{
+  required PacketHead msgHead = 1;
+  required YouMeIM_MessageBodyFile messageBody = 2;
+  required YouMeIM_ChatType chatType = 3;
+  required string YOUMEGROUPID = 4;
+}
+//语音消息上传服务器
+message YouMeIM_Command_ClientToServerVoice
+{
+  required PacketHead msgHead = 1;
+  required YouMeIM_MessageBodyVoice  messageBody = 2;
+  required YouMeIM_ChatType chatType = 3;
+  required string YOUMEGROUPID = 4;
+}
+
+//回复的自定义消息
+message YouMeIM_Command_ServerToClientCustom
+{
+  required ServerPacketHead msgHead = 1;
+  required YouMeIM_MessageBodyCustom messageBody = 2;
+  required string  senderYOUMEID = 3; 
+  required YouMeIM_ChatType chatType = 4;
+  required string  YOUMEGROUPID = 5;
+}
+
+
+//接收到聊天消息
+message YouMeIM_Command_ServerToClientText
+{
+  required ServerPacketHead msgHead = 1;
+  required YouMeIM_MessageBodyText messageBody = 2;
+  required string  senderYOUMEID = 3;
+  required YouMeIM_ChatType chatType = 4;
+  required string  YOUMEGROUPID = 5;
+}
+
+
+message YouMeIM_Command_ServerToClientEmoji
+{
+  required ServerPacketHead msgHead = 1;
+  required YouMeIM_MessageBodyEmoji messageBody = 2;
+  required string  senderYOUMEID = 3;
+  required YouMeIM_ChatType chatType = 4;
+  required string  YOUMEGROUPID = 5;
+}
+
+
+message YouMeIM_Command_ServerToClientFile
+{
+  required ServerPacketHead msgHead = 1;
+  required YouMeIM_MessageBodyFile messageBody = 2;
+  required string  senderYOUMEID = 3;
+  required YouMeIM_ChatType chatType = 4;
+  required string  YOUMEGROUPID = 5;
+}
+//语音消息下发客户端
+message YouMeIM_Command_ServerToClientVoice
+{
+  required ServerPacketHead msgHead = 1;
+  required YouMeIM_MessageBodyVoice messageBody = 2;
+  required string  senderYOUMEID = 3;
+  required YouMeIM_ChatType chatType = 4;
+  required string  YOUMEGROUPID = 5;
+}
+
+message YouMeIM_Command_MessageAck
+{
+  required ServerPacketHead msgHead = 1;
+}
+
+
+message YouMeIM_Command_GetOfflineMsg
+{
+	required PacketHead msgHead = 1;
+	required YouMeIM_ChatType chatType =2;
+	required string YOUMEGROUPID=3;
+	optional uint64 lastMsgSerial = 4;
+}
+
+message YouMeIM_Command_GetOfflineMsgResponse
+{
+	required ServerPacketHead msgHead = 1;
+	required YouMeIM_ChatType chatType =2;
+	required string YOUMEGROUPID=3;
+	repeated bytes msgLists = 4;
+	optional uint64 lastMsgSerial = 5;
+}
+
+//获取上传凭证 请求
+message YouMeIM_Command_GetUploadToken
+{
+	required PacketHead msgHead = 1;
+	optional string uploadpolicy = 2;
+	optional uint32 areaCode = 3;
+	optional uint32 fileSize = 4;
+	optional string md5 = 5;
+	optional string suffix = 6;
+}
+//获取上传凭证 响应
+message YouMeIM_Command_GetUploadTokenResponse
+{
+	required ServerPacketHead msgHead = 1;
+	required string uploadtoken = 2;
+	repeated NameValue headInfo = 3;
+}
+
+//获取下载凭证 请求
+message YouMeIM_Command_GetDownloadToken
+{
+	required PacketHead msgHead = 1;
+	required string key = 2;
+}
+//获取下载凭证 响应
+message YouMeIM_Command_GetDownloadTokenResponse
+{
+	required ServerPacketHead msgHead = 1;
+	required string downloadurl = 2;
+}
+
+message YouMeIM_Command_GetMessageNotify
+{
+	required ServerPacketHead msgHead = 1;
+}

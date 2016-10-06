@@ -1,0 +1,255 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+package YouMeIMProtocol;
+import "im_common.proto";
+
+
+
+//群类型
+enum YouMeIM_GroupType
+{
+    //普通群
+    GroupType_Group = 0;
+    //聊天室
+    GroupType_ChatRoom = 1;
+}
+
+
+
+//群成员
+enum YouMeIM_GroupPermission
+{
+    //啥都木有
+    GroupPermission_None = 0;
+   
+    //普通成员
+    GroupPermission_Common=1;
+    GroupPermission_AddMember=2;
+    GroupPermission_Kickout=4;
+    GroupPermission_ModifyGroupInfo=8;
+    GroupPermission_ModifyMemberInfo=16;
+
+
+    //超级权限，啥都有，32位都是1
+    GroupPermission_All = -1;
+   
+}
+
+
+//组信息
+message YouMeIM_GroupInfo
+{
+  required string groupID=1;
+  required string groupName =2;
+  required YouMeIM_GroupType groupType = 3;
+}
+
+//组成员信息
+message YouMeIM_MemberInfo
+{
+    required string YOUMEID = 1;
+	required int32  status = 2;
+    required YouMeIM_GroupPermission memberPower =3;
+}
+
+
+
+
+//获取分组信息
+message YouMeIM_Command_GetGroupInfo
+{
+    required PacketHead msgHead = 1;
+    required string groupID = 2;
+}
+
+//获取分组信息回调
+message YouMeIM_Command_GetGroupInfoResponse
+{
+    required ServerPacketHead msgHead = 1;
+    optional YouMeIM_GroupInfo groupInfo = 2;
+}
+
+//获取所有的分组
+message YouMeIM_Command_GetAllGroup
+{
+    required PacketHead msgHead = 1;
+}
+
+//获取所有分组回复
+message YouMeIM_Command_GetAllGroupResponse
+{
+    required ServerPacketHead msgHead = 1;
+    repeated YouMeIM_GroupInfo groupInfos = 2;
+}
+
+//创建群
+message YouMeIM_Command_CreateGroup
+{
+    required PacketHead msgHead = 1;
+    required YouMeIM_GroupType groupType = 2;
+    required string groupName=3;
+}
+
+//创建群回复
+message YouMeIM_Command_CreateGroupResponse
+{
+    required ServerPacketHead msgHead = 1;
+    optional YouMeIM_GroupInfo groupInfo = 2;    
+}
+
+//销毁群
+message YouMeIM_Command_DestroyGroup
+{
+    required PacketHead msgHead = 1;
+    required string groupID = 2;
+}
+
+//销毁群回调
+message YouMeIM_Command_DestroyGroupResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+}
+
+//群被销毁了
+message YouMeIM_Command_GroupDestroyed
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+}
+
+//加入群
+message YouMeIM_Command_JoinGroup
+{
+    required PacketHead msgHead = 1;
+    required string groupID = 2;
+    required YouMeIM_GroupType groupType = 3;
+    optional string reason = 4;
+}
+//加入群的请求是否发送出去
+message YouMeIM_Command_JoinGroupResquest
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+}
+//管理员接收到加群申请
+message YouMeIM_Command_JoinGroupInvited
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+	required string YOUMEID=3;
+    optional string reason = 4;
+}
+
+
+//添加好友回复事件
+enum YouMeIM_JoinGroupEvent
+{
+    JoinGroupEvent_Agree=0;
+    JoinGroupEvent_Refuse = 1;
+}
+//同意加群申请
+message YouMeIM_Command_AgreeGroupInvited
+{
+    required PacketHead msgHead = 1;
+    required string groupID = 2;
+    required string YOUMEID= 3;
+}
+
+//拒绝加群申请
+message YouMeIM_Command_RefuseGroupInvited
+{
+    required PacketHead msgHead = 1;
+    required string groupID = 2;
+    required string YOUMEID= 3;
+    optional string reaseon = 4;
+}
+
+
+//同意申请回复或者拒绝申请回复，服务端返回给 管理员
+message YouMeIM_Command_GroupInvitedResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+    required string YOUMEID= 3;
+	required YouMeIM_JoinGroupEvent evtType=4;
+}
+//加入群回调,同意或者拒绝，服务器发给申请人的消息
+message YouMeIM_Command_JoinGroupResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required YouMeIM_JoinGroupEvent evtType=2;
+    optional YouMeIM_GroupInfo groupInfo = 3;
+}
+
+//有人加入到群了
+message YouMeIM_Command_OtherJoinGroup
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+    required YouMeIM_MemberInfo memberInfo = 3;
+}
+
+//离开群
+message YouMeIM_Command_LeaveGroup
+{ 
+    required PacketHead msgHead = 1;
+    required string groupID = 2;
+}
+
+//离开群回复
+message YouMeIM_Command_LeaveGroupResponse
+{
+   required ServerPacketHead msgHead = 1;
+   required string groupID = 2;
+}
+
+//有人离开群了
+message YouMeIM_Command_OtherLeaveGroup
+{
+   required ServerPacketHead msgHead = 1;
+   required string groupID = 3;
+   required string YOUMEID = 4;
+}
+
+
+//踢出成员
+message YouMeIM_Command_KickoutMember
+{
+    required PacketHead msgHead = 1;
+    required string groupID = 2;
+    required string YOUMEID = 3;
+}
+
+//踢出成员回复
+message YouMeIM_Command_KickoutMemberResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+    required string YOUMEID = 3;
+}
+
+//群成员被踢出了
+message YouMeIM_Command_OtherKickoutedFromGroup
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+    required string YOUMEIID = 3;
+}
+
+//获取群成员信息
+message YouMeIM_Command_GetGroupMembers
+{
+    required PacketHead msgHead = 1;
+    required string groupID = 2;
+}
+
+//群成员信息回复
+message YouMeIM_Command_GetGroupMembersResponse
+{
+    required ServerPacketHead msgHead = 1;
+    required string groupID = 2;
+    repeated YouMeIM_MemberInfo memberInfo= 3;
+}
+
+

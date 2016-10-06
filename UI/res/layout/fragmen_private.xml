@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- 联系人列表 -->
+
+    <LinearLayout
+        android:id="@+id/contacts_background"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/list_contacts"
+            android:layout_width="138dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:divider="#0000"
+            android:dividerHeight="1dp"
+            android:scrollbars="none" >
+        </ListView>
+    </LinearLayout>
+
+    <!-- 输入区域 -->
+
+    <LinearLayout
+        android:id="@+id/input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@id/contacts_background"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/speechbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/youme_im_microphone" />
+
+        <EditText
+            android:id="@+id/inputedit"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_margin="3dp"
+            android:layout_toRightOf="@id/speechbtn"
+            android:layout_weight="1"
+            android:background="@drawable/youme_im_input_edit"
+            android:ems="10"
+            android:paddingLeft="3dp" >
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/imagebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_toRightOf="@id/inputedit"
+            android:background="@drawable/youme_im_faceimage_btn_normal" />
+
+        <ImageButton
+            android:id="@+id/sendbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_toRightOf="@id/imagebtn"
+            android:background="@drawable/youme_im_sendmsg" />
+    </LinearLayout>
+    <!-- 聊天记录列表 -->
+
+    <LinearLayout
+        android:id="@+id/chat_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/input"
+        android:layout_toRightOf="@id/contacts_background"
+        android:background="@drawable/youme_im_chat_background" >
+
+        <ListView
+            android:id="@+id/list_chatcontent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:divider="#0000"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll" >
+        </ListView>
+    </LinearLayout>
+    <!-- 表情选择区 -->
+
+    <LinearLayout
+        android:id="@+id/faceimagepanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/input"
+        android:background="@drawable/youme_im_image_panel"
+        android:orientation="vertical" >
+
+        <ViewFlipper
+            android:id="@+id/faceFlipper"
+            android:layout_width="match_parent"
+            android:layout_height="130dip"
+            android:background="#d0d3d5" >
+        </ViewFlipper>
+
+        <LinearLayout
+            android:id="@+id/pagePoint"
+            android:layout_width="match_parent"
+            android:layout_height="20dip"
+            android:layout_below="@id/faceFlipper"
+            android:background="#d0d3d5"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/faceimageLauncher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pagePoint"
+            android:background="@drawable/youme_im_image_launcher"
+            android:gravity="left"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

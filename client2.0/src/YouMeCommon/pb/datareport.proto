@@ -1,0 +1,20 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+import "common.proto";
+package YouMeCommonProtocol;
+
+message DataReportRequest
+{
+	 required PacketHead msgHead = 1;
+	 repeated NameValue contents=2;
+	 optional int64 reportTime = 3;
+}
+
+//数据上报回复
+message DataReportResponse
+{
+   required ServerPacketHead serverHead=1;
+}
+
+
+

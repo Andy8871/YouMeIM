@@ -1,0 +1,119 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+package YouMeCommonProtocol;
+enum MSG_TYPE
+{
+MSG_SDK_AUTH   = 0; //服务器验证消息名
+}
+
+
+//设备平台
+enum Device_Platform
+{
+    Platform_Unknow = 0;
+    Platform_Android=1;
+    Platform_IOS=2;
+    Platform_Windows=3;
+    Platform_OSX=4;
+    Platform_Linux=5;
+}
+
+//网络类型
+enum NetworkType
+{
+    NetworkType_Unknow=0;
+    NetworkType_3G=1; //移动网络
+    NetworkType_Wifi=2;
+}
+
+
+//定义的一些namevlau 结构, 对于数据上报，暂时只有int32， int64， string 类型
+enum NAME_TYPE
+{
+    NAME_UNKNOW = 0;
+    NAME_INT32  = 1;
+    NAME_UIN32  = 2;
+    NAME_INT64  = 3;
+    NAME_UINT64 = 4;
+    NAME_STRING = 5;
+    NAME_BYTES  = 6;
+    NAME_BOOL  = 7;
+	NAME_BLOB  =8;
+}
+
+message NameValue
+{
+    required string name = 1;
+    required string value = 2;
+    required NAME_TYPE type  = 3;
+}
+
+// 数据包的头部信息,尽可能少的字段，这个部分会解析2次，客户端发过去的
+message PacketHead
+{
+    //消息类型
+    required int32 msgtype=1;
+    //协议版本号
+    required int32 msgversion =2;
+    //设备平台
+    required Device_Platform platform =3;
+    optional string Brand           = 4;//
+    optional string SysVersion        = 5;
+    optional int32  YmSdkVersion      = 6;
+    optional string CpuArch           = 7;
+    optional string PackageName       = 8;
+    optional string Identify =9;
+    optional string AppKey            = 10;
+    optional string SDKName           = 11;//用于区分是什么SDK，例如“voice”，“im”
+    optional string Model             =12;//手机型号
+    optional NetworkType NetworkType = 13;//网络类型
+    optional string CPUChip = 14;//CPU芯片
+
+    //下面的字段是根据每个业务不同自己添加的，为了兼容一定要使用optional。 否则SDK 验证会出错
+   
+}
+
+
+//需要再封装一下，否则解不出来
+message ReqHead
+{
+   required PacketHead head=1;
+}
+
+
+// 服务器返回的 数据包的头部信息
+message ServerPacketHead
+{
+    //消息类型
+    required int32 msgtype=1;
+    //协议版本号
+    required int32 msgversion=2;
+    required int64 msgSerialNum=3;
+    //错误码
+    required int32 code=4;//0表示成功，其他看具体业务
+
+     //下面的字段是根据每个业务不同自己添加的，为了兼容一定要使用optional。
+}
+
+message ServerReqHead
+{
+    required ServerPacketHead head=1;
+}
+//SDK 请求以及返回
+message SDKValidateRequest
+{
+    required PacketHead head=1;
+    required bytes data=2;
+}
+
+message SDKValidateResponse
+{
+    //0 成功 1 需要重试，重试的时间间隔由 timeout 决定 其他直接退出
+    required int32 status=1;
+    required bytes data=2;
+    repeated NameValue configurations=3;
+    optional int32 timeout=4;
+}
+
+
+

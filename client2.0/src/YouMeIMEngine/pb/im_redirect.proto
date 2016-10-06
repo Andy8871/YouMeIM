@@ -1,0 +1,16 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+package YouMeIMProtocol;
+import "im_common.proto";
+message YouMeIM_Command_Redirect
+{
+    required PacketHead msgHead = 1;
+}
+
+message YouMeIM_Command_RedirectResponse
+{
+	required ServerPacketHead msgHead = 1;
+	required string ip =2;
+	required int32  port=3;
+	optional int32 timeout =4;
+}
